@@ -1,0 +1,78 @@
+==================================================================
+https://keybase.io/peggy
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://lipeggy.com
+  * I am peggy (https://keybase.io/peggy) on keybase.
+  * I have a public key with fingerprint ECF5 3C8A C018 9C5E AA70  A72F 3D98 0DA9 88A1 BC42
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "ecf53c8ac0189c5eaa70a72f3d980da988a1bc42",
+            "host": "keybase.io",
+            "key_id": "3d980da988a1bc42",
+            "kid": "010135666302bd55a76d1bf3ec4ebd0e8ba0227119e9d3036a575422b32941c901e70a",
+            "uid": "2f8a0c01f668bca73ec51c0d8da77d19",
+            "username": "peggy"
+        },
+        "revoke": {
+            "sig_ids": [
+                "c02b51c3bdba4916e7fd0fa87d8ab644071ae51f8504570021180def50257d120f"
+            ]
+        },
+        "service": {
+            "hostname": "lipeggy.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1434697280,
+    "expire_in": 157680000,
+    "prev": "970e5c59823330dcff0268103ae4c86fb713fdcedfb6a483e875761dcd33348c",
+    "seqno": 8,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Comment: GPGTools - https://gpgtools.org
+
+owFtkntQVFUcxxdIaUkeoqQjgsOlZICVOfd97yaGjwkKaJgEHWJyvY9zl8tj73Z3
+QYgoa4OQJCCNnIaHJCVkCDNEIT4opxFHM3n0kMleE4PSOkOpCyIgnWXsv84/Z845
+39/n+/2dc+oC/QwBPolHAjuqWs9s87k8KRqyXOfSyjBRk0sxcxmWD5cmRbVZoW7X
+VZsTM2NQUmhS4gQJ4Bwv0VAQWCCwhELKPAdkgec4ARclisBMWK7m8FYgjCg4YIKq
+oT20sKgy2v0fff7SAcABTtIMw5CAEGWaFlhGxkWFhBIFRRlAThQAQbA4zkNeJgHJ
+CDRLUwQhkgRP4RIPcIgSIVzREo5QOAGgsArDcKIksIhD4xKQOVlgWRnnvUIH1G1C
+IURqO7RaS7FyE6bDYi0fett3qFaU2IGZczAJJULFpCiLAsXjDGQVGSgCx8qcIDIU
+BVhcgDSucDSgaBYAAsdRj1ChAUEjLwIo2EuIjeyKVWkJ7r2ih9YF6pJ5gqQVokx2
+XXNqklaADnKdTrvZm8lZavcK90HR8hBhEVWbjJ4HFRRD3aFqNsyMI6XkVL1MnCIp
+hmcJDpgwWGJXdWhRvQqaZTiAhtcGFiMkzwJIS9k0zxEkSQJZUhRAMBwOSAFSEsco
+IouTiixBWREZgeJIyLEIgsuSjPQUJ2Herl62aZiZQzkFK2Kie7MJziIdYuUBB3zX
+P2LwCTAsX+br/WKGAGPIf//u29jghTU5GVpUY6LfqtIfntFOW+NDRhsePTtu2/p4
+uqe+J7qn5V5LqqeCWais2tZ84sXNB9oOD5909V9Irt8b0X43enPIoPJazoqgn4iZ
+xdE3O5tLL5y3BGay0294/DjzRK8xb//G1qaRsLwpkHmiLu2fdD7zrazmjCzw46fn
+Y3c+tWCzx22auNQXefPXZ/FA9eLlxeW7cddjX/ibtnTuyf3r95K6wYG6pCPv3vNN
+WlV8qHZeqt2tP/16f8FddijSN3blB7dOvv/Hd9fyzjZnH78/NLnhQ/8dZSWu8esm
+OopuUC42JucYcz+6XXMreGqsPe0367Q1s+9q3mDQFk/1xn3Elw3rlfiu9LGm499n
+lUz5uBq2zRduuDPedmwde2r21OLNKH2x15J4OMZ2w9I0NuS5Q92vDv56NOjVbqvT
+VTO8NuF0Uej0oU3kV/5dnq6kifikg9GfHR2PMIVLDlPt9sjAPR+/1/igJTJl7pvn
+b+jXp8qrtAcT76TOdcfEdRzbsdad2mOcTV4WPuA5s2ZvRu+8sXMi5tzBpM/7JvqH
+4opW6A2G9vCtkb88IS1OK5dSDHrUzAjlYOdeMMLB+mAXiI7qeSVilvMM3x5oezIs
++u3traFlq1ue69QKmnaGdV8Zq6z8u7l+l3tkMsU9VX2lInvh6upd65L2V9Tkj/fW
+/zmz0v0J7vb8fDT0mrvZ2vEv
+=QSYx
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/peggy
+
+==================================================================
