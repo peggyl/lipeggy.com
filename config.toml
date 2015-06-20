@@ -1,7 +1,12 @@
 baseurl = "http://lipeggy.com/"
 languageCode = "en-us"
 
+theme = "vienna"
+
 title = "Peggy Li"
+
+[permalinks]
+    post = "/:year/:month/:day/:title"
 
 [params]
 	twitter = "_peggyli"
@@ -9,3 +14,4 @@ title = "Peggy Li"
 	linkedin = "peggyli224"
 	ga_api_key = "UA-60717155-1"
 	author = "Peggy Li"
+    contact = "mailto:hi@lipeggy.com"
