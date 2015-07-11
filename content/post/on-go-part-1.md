@@ -48,13 +48,13 @@ And more strangely...
 
 My inclination is to give the benefit of the doubt; surely code in a widely-used open-source project wouldn't contain a clear syntax bug, or it would have been reported and fixed already? No matter how silly a logical error there might be, I'm confident that the developer would at least make sure the code _compiles_ at all. But I do quickly check for missing/extra opening or closing braces or parentheses; all good.
 
-I comment out lines 92 - 117 and rerun; nope, the error persists, but at least I've eliminated that (relatively) giant block, which is good. Since this loop uses both `ch` and `files`, I think I can assume those are both well-formed, but I'll throw in a couple of print statements to make sure they're not some null/nil value. Also, head to the playground ([play.golang.org]) to make sure := and <- are both indeed valid tokens. All good there.
+I comment out lines 92 - 117 and rerun; nope, the error persists, but at least I've eliminated that (relatively) giant block, which is good. Since this loop uses both `ch` and `files`, I think I can assume those are both well-formed, but I'll throw in a couple of print statements to make sure they're not some null/nil value. Also, head to the playground ([play.golang.org](http://play.golang.org)) to make sure := and <- are both indeed valid tokens. All good there.
 
 Maybe there's an unexpected nil or index-out-of-bounds type issue with the loop causing the body execution to fail? But commenting out lines 119 - 121 doesn't help either, which means that the issue is literally something with `for range files`. (If you've been using Go for awhile, you can probably guess by now.)
 
 Completely stumped and almost ready to give up now, I look at `git blame` and `git log` as a final resort, to see if there were any potentially suspect recent changes. Aha! All I need to see is this commit message (not even the diff): [go 1.4 support](https://github.com/sourcegraph/srclib-go/commit/26ec06a07590eb5311019babedaf0b2b31d3c509)
 
-Okay, this is a minor (not micro) version change to the Go language itself, which generally means not full backwards-compatibility unlike. But still, it's a simple `for` loop! If/else statements and for loops are pretty much the simplest staple control flow structures in most languages, right? But a quick Google search for "golang 1.4" takes me to [https://blog.golang.org/go1.4](https://blog.golang.org/go1.4), where the third paragraph proudly announces:
+Okay, this is a minor (not micro) version change to the Go language itself, which generally means not full backwards-compatibility. But still, it's a simple `for` loop! If/else statements and for loops are pretty much the simplest staple control flow structures in most languages, right? But a quick Google search for "golang 1.4" takes me to [https://blog.golang.org/go1.4](https://blog.golang.org/go1.4), where the third paragraph proudly announces:
 
 > The language change is a tweak to the syntax of for-range loops. You may now write "for range s {" to loop over each item from s, without having to assign the value, loop index, or map key.
 
