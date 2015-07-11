@@ -40,7 +40,7 @@ Time to troubleshoot! Much of this probably seems obvious to you (or even me) no
 
 As I try to read and understand Go for what I consider the first time, I have two main thoughts:
 
-* What is the difference between `:=`` and `=` anyway? I've used Python, Java, C, and JavaScript and _tiny_ amounts of Ruby and Perl once upon a time, so = seems obvious. But what is :=? It looks like it's being used in a similar manner to =, so what's the difference? (Answer: short variable declarations)
+* What is the difference between `:=` and `=` anyway? I've used Python, Java, C, and JavaScript and _tiny_ amounts of Ruby and Perl once upon a time, so = seems obvious. But what is :=? It looks like it's being used in a similar manner to =, so what's the difference? (Answer: short variable declarations)
 
 And more strangely...
 
