@@ -1,6 +1,6 @@
 +++
 date = "2015-07-11T15:33:39-07:00"
-title = "On Go (part 1 of many)"
+title = "On discovering Go"
 draft = false
 +++
 
