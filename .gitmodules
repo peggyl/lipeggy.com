@@ -1,3 +1,6 @@
 [submodule "themes/vienna"]
 	path = themes/vienna
 	url = https://github.com/peggyl/vienna.git
+[submodule "themes/haydn"]
+	path = themes/haydn
+	url = https://github.com/peggyl/haydn.git

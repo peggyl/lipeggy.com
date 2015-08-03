@@ -1,7 +1,7 @@
 baseurl = "http://lipeggy.com/"
 languageCode = "en-us"
 
-theme = "vienna"
+theme = "haydn"
 
 title = "Peggy Li"
 
