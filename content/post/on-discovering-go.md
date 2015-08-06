@@ -36,7 +36,14 @@ This is getting nowhere, so there's probably a more "interesting" issue than my 
 
 Time to troubleshoot! Much of this probably seems obvious to you (or even me) now, but keep in mind that this was my very first time looking at non-trivial (e.g. print hello world or sum the numbers from 1-10) Go source code, and I'd mostly read _about_ Go on Quora and Hacker News. Open the file in vim, and jump to [line 118](https://github.com/golang/gddo/blob/4523d2f070c74ef847157e9aa14137376df63964/gosrc/client.go#L118):
 
-<script type="text/javascript" src="https://sourcegraph.com/R$15595@4523d2f070c74ef847157e9aa14137376df63964===4523d2f070c74ef847157e9aa14137376df63964/.tree/gosrc/client.go/.sourcebox.js?StartLine=118&EndLine=122"></script>
+```go
+for range files {
+	if err := <-ch; err != nil {
+		return err
+	}
+}
+return nil
+```
 
 As I try to read and understand Go for what I consider the first time, I have two main thoughts:
 
