@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://lipeggy.com/</loc>
+    <lastmod>2015-07-11T15:33:39-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lipeggy.com/2015/07/11/on-discovering-go</loc>
+    <lastmod>2015-07-11T15:33:39-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://lipeggy.com/2015/06/21/on-phones-part-1</loc>
+    <lastmod>2015-06-21T23:45:59-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://lipeggy.com/2015/05/24/on-buying-books-and-donating</loc>
+    <lastmod>2015-05-24T03:25:34-07:00</lastmod>
+  </url>
+  
+</urlset>

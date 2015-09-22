@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Peggy Li</title>
+    <link>http://lipeggy.com/post/</link>
+    <description>Recent content in Posts on Peggy Li</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Jul 2015 15:33:39 -0700</lastBuildDate>
+    <atom:link href="http://lipeggy.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>On discovering Go</title>
+      <link>http://lipeggy.com/2015/07/11/on-discovering-go</link>
+      <pubDate>Sat, 11 Jul 2015 15:33:39 -0700</pubDate>
+      
+      <guid>http://lipeggy.com/2015/07/11/on-discovering-go</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; For a more inspiring and technically informative account of learning Go, you should check out Audrey Lim&amp;rsquo;s brilliant GopherCon 2015 talk on &lt;a href=&#34;https://sourcegraph.com/blog/live/gophercon2015/123565059490&#34;&gt;How a Complete Beginner learned Go as her first backend language in 5 weeks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Anyone who&amp;rsquo;s followed (but not muted) me on Twitter in recent months has probably seen at least one of my tweets to @srcgraph. A few days ago, I posted two semi-cryptic tweets that I&amp;rsquo;m (finally) going to explain in more detail than anyone else should care about:&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; lang=&#34;en&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;I don&amp;#39;t normally do this, but I promise I&amp;#39;ll only say it once: please consider following / trying &lt;a href=&#34;https://twitter.com/srcgraph&#34;&gt;@srcgraph&lt;/a&gt;. I seriously owe them so much.&lt;/p&gt;&amp;mdash; Peggy Li (@_peggyli) &lt;a href=&#34;https://twitter.com/_peggyli/status/619669834834415620&#34;&gt;July 11, 2015&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; lang=&#34;en&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/francesc&#34;&gt;@francesc&lt;/a&gt; &lt;a href=&#34;https://twitter.com/srcgraph&#34;&gt;@srcgraph&lt;/a&gt; it&amp;#39;s actually how I got into Go, and Go is what restored my faith in tech communities. :)&lt;/p&gt;&amp;mdash; Peggy Li (@_peggyli) &lt;a href=&#34;https://twitter.com/_peggyli/status/619685132882960384&#34;&gt;July 11, 2015&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Roughly six months ago, I had the opportunity to meet somebody on the Sourcegraph team, so I did what any curious person would: Google &amp;ldquo;sourcegraph&amp;rdquo; and decide to install &lt;code&gt;srclib&lt;/code&gt;. (I have since mostly stopped Googling people / companies.)&lt;/p&gt;
+
+&lt;p&gt;Cool, I just need to follow the excellent instructions on &lt;a href=&#34;https://srclib.org/install&#34;&gt;https://srclib.org/install&lt;/a&gt;, at &lt;a href=&#34;https://github.com/sourcegraph/srclib/blob/eb7ef77f0dd949ca8e5fde18becc0b8a34ce11ad/docs/sources/gettingstarted.md&#34;&gt;this commit&lt;/a&gt; at the time. I already have Go installed, the &lt;code&gt;src&lt;/code&gt; CLI installs flawlessly, and now I just need the language toolchains (whatever those are). I know I have Python, Node, Ruby, and Go all installed, so shouldn&amp;rsquo;t have any issues here&amp;hellip; oh wait, installation error?&lt;/p&gt;
+
+&lt;p&gt;The error message doesn&amp;rsquo;t make immediate sense to me, so I try the usual things first: rerun the command in case there was a partial or corrupt download. &lt;code&gt;rm -rf&lt;/code&gt; the download directory and &lt;em&gt;then&lt;/em&gt; rerun again. Rerun from a different directory; maybe I should be in $HOME or $GOPATH, as opposed to whatever my current working directory was. Rerun as root; there&amp;rsquo;s nothing in the output about permission denied, but can&amp;rsquo;t hurt to try? (Note: please don&amp;rsquo;t really blindly &lt;code&gt;sudo&lt;/code&gt; run unfamiliar commands.)&lt;/p&gt;
+
+&lt;p&gt;This is getting nowhere, so there&amp;rsquo;s probably a more &amp;ldquo;interesting&amp;rdquo; issue than my inability to copy-paste and execute a command. Time to take a closer look at the root error itself. (Yes, this is usually a logical first or second step, not fifth.)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~/go/src/github.com/sourcegraph/srclib-go $ go get github.com/golang/gddo/gosrc
+../../golang/gddo/gosrc/client.go:118: syntax error: unexpected range, expecting {
+../../golang/gddo/gosrc/client.go:119: syntax error: unexpected {, expecting semicolon or newline or }
+../../golang/gddo/gosrc/client.go:122: syntax error: unexpected }
+../../golang/gddo/gosrc/client.go:123: non-declaration statement outside function body
+../../golang/gddo/gosrc/client.go:124: syntax error: unexpected }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Time to troubleshoot! Much of this probably seems obvious to you (or even me) now, but keep in mind that this was my very first time looking at non-trivial (e.g. print hello world or sum the numbers from 1-10) Go source code, and I&amp;rsquo;d mostly read &lt;em&gt;about&lt;/em&gt; Go on Quora and Hacker News. Open the file in vim, and jump to &lt;a href=&#34;https://github.com/golang/gddo/blob/4523d2f070c74ef847157e9aa14137376df63964/gosrc/client.go#L118&#34;&gt;line 118&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;for range files {
+	if err := &amp;lt;-ch; err != nil {
+		return err
+	}
+}
+return nil
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As I try to read and understand Go for what I consider the first time, I have two main thoughts:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;What is the difference between &lt;code&gt;:=&lt;/code&gt; and &lt;code&gt;=&lt;/code&gt; anyway? I&amp;rsquo;ve used Python, Java, C, and JavaScript and &lt;em&gt;tiny&lt;/em&gt; amounts of Ruby and Perl once upon a time, so = seems obvious. But what is :=? It looks like it&amp;rsquo;s being used in a similar manner to =, so what&amp;rsquo;s the difference? (Answer: short variable declarations)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And more strangely&amp;hellip;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Why is the developer checking for an error almost every other line? Is this code actually even reliable, or should I just be expecting it to fail? (Answer: the code is perfectly fine and consistent with Go&amp;rsquo;s error handling philosophy.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;My inclination is to give the benefit of the doubt; surely code in a widely-used open-source project wouldn&amp;rsquo;t contain a clear syntax bug, or it would have been reported and fixed already? No matter how silly a logical error there might be, I&amp;rsquo;m confident that the developer would at least make sure the code &lt;em&gt;compiles&lt;/em&gt; at all. But I do quickly check for missing/extra opening or closing braces or parentheses; all good.&lt;/p&gt;
+
+&lt;p&gt;I comment out lines 92 - 117 and rerun; nope, the error persists, but at least I&amp;rsquo;ve eliminated that (relatively) giant block, which is good. Since this loop uses both &lt;code&gt;ch&lt;/code&gt; and &lt;code&gt;files&lt;/code&gt;, I think I can assume those are both well-formed, but I&amp;rsquo;ll throw in a couple of print statements to make sure they&amp;rsquo;re not some null/nil value. Also, head to the playground (&lt;a href=&#34;http://play.golang.org&#34;&gt;play.golang.org&lt;/a&gt;) to make sure := and &amp;lt;- are both indeed valid tokens. All good there.&lt;/p&gt;
+
+&lt;p&gt;Maybe there&amp;rsquo;s an unexpected nil or index-out-of-bounds type issue with the loop causing the body execution to fail? But commenting out lines 119 - 121 doesn&amp;rsquo;t help either, which means that the issue is literally something with &lt;code&gt;for range files&lt;/code&gt;. (If you&amp;rsquo;ve been using Go for awhile, you can probably guess by now.)&lt;/p&gt;
+
+&lt;p&gt;Completely stumped and almost ready to give up now, I look at &lt;code&gt;git blame&lt;/code&gt; and &lt;code&gt;git log&lt;/code&gt; as a final resort, to see if there were any potentially suspect recent changes. Aha! All I need to see is this commit message (not even the diff): &lt;a href=&#34;https://github.com/sourcegraph/srclib-go/commit/26ec06a07590eb5311019babedaf0b2b31d3c509&#34;&gt;go 1.4 support&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Okay, this is a minor (not micro) version change to the Go language itself, which generally means not full backwards-compatibility. But still, it&amp;rsquo;s a simple &lt;code&gt;for&lt;/code&gt; loop! If/else statements and for loops are pretty much the simplest staple control flow structures in most languages, right? But a quick Google search for &amp;ldquo;golang 1.4&amp;rdquo; takes me to &lt;a href=&#34;https://blog.golang.org/go1.4&#34;&gt;https://blog.golang.org/go1.4&lt;/a&gt;, where the third paragraph proudly announces:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The language change is a tweak to the syntax of for-range loops. You may now write &amp;ldquo;for range s {&amp;rdquo; to loop over each item from s, without having to assign the value, loop index, or map key.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;With a slightly sinking feeling, I ran &lt;code&gt;go version&lt;/code&gt;&amp;hellip; lo and behold, I&amp;rsquo;m running Go 1.3 (installed back in early or mid December, if I recall correctly; 1.4 was released around the same time). I try uninstalling / deleting my full Go installation and reinstalling a couple of times, to no avail, until I realize &lt;code&gt;brew install go&lt;/code&gt; is just still picking up 1.3. Indeed, the only thing I had to do was download and install 1.4 from source. Whew, &lt;em&gt;finally&lt;/em&gt;!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Let&amp;rsquo;s quickly review (what I consider to be) two central tenets of software development and distribution:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Up-to-date documentation (including installation/usage instructions)&lt;/li&gt;
+&lt;li&gt;Reproducible builds (this often includes some concept of [preferably versioned] package/dependency management)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is why I often say (or at least think) that me &amp;ldquo;discovering&amp;rdquo; Go was a complete fluke, or at least a lucky accident. In a perfect world, the docs would have said 1.4, or the dependent golang/gddo package would be fully backwards-compatible. I would have peacefully installed it and happily moved along, none the wiser about Go. It&amp;rsquo;s entirely possible that, say, had something like &lt;a href=&#34;http://getgb.io/&#34;&gt;&lt;code&gt;gb&lt;/code&gt;&lt;/a&gt; existed at the time, I would not have really gotten hooked on Go, or at least when I did. (Please make sure you keep your docs and dependencies up-to-date and consistent though!)&lt;/p&gt;
+
+&lt;p&gt;Instead, I found myself super intrigued by the handful of lines of code I had looked at.  I was immediately struck by and attacted to how readable, approachable, and clear it was. It certainly helps that I have experience with multiple other languages, but I&amp;rsquo;ve also skimmed tutorials on, say, OCaml and Haskell, where FP principles themselves made sense but the overabundance of non-alphanumeric tokens in code made my head spin. The terse expressiveness of Scala (compared to Java, at least) and syntactic sugar of Ruby are great for developer productivity or just &amp;ldquo;code golf&amp;rdquo;, but also mean that production source code isn&amp;rsquo;t always beginner-friendly. In contrast, Go&amp;rsquo;s fairly concise and straighforward syntax and tools like &amp;ldquo;gofmt&amp;rdquo; that enforce consistency in code style made the language much easier to digest from day one, and I found myself perusing the &lt;a href=&#34;https://tour.golang.org/welcome/1&#34;&gt;Go Tour&lt;/a&gt;, &lt;a href=&#34;https://golang.org/doc/effective_go.html&#34;&gt;Effective Go&lt;/a&gt;, &lt;a href=&#34;https://gobyexample.com/&#34;&gt;Go by Example&lt;/a&gt;, etc. later that afternoon and weekend.&lt;/p&gt;
+
+&lt;p&gt;But&amp;hellip; fast forward to today, and oh, cruel irony! I wanted to include as accurate of an error message as possible, so I decided to install &lt;code&gt;srclib&lt;/code&gt; inside a Docker container running the golang:1.3 image. Naturally, I then spent several hours trying to figure out &lt;a href=&#34;https://github.com/boot2docker/osx-installer/issues/122&#34;&gt;this Docker issue&lt;/a&gt; and seriously trying to convince myself this is not the universe changing its mind and signaling that I should quit Go and the Go community. (Solution here: forget boot2docker, an AWS instance is only $2.) I really am not making this up.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;On the last day of GopherCon 2015, I attended the Code of Conduct &amp;amp; Diversity session and called out a prominent member of the Go team (in front of the person himself) for a discouraging comment I had happened to overhear. About half an hour later, I finally gathered the courage to approach someone from Sourcegraph and awkwardly share an abbreviated version of this story. The second conversation was actually &lt;em&gt;by far&lt;/em&gt; the scarier of the two, not least because I was essentially saying, &amp;ldquo;I&amp;rsquo;m basically here today because your documentation was a lie, so thank you for that.&amp;rdquo; I seriously expected to be laughed away or outright dismissed, so the polite incredulity was a better response than I could have hoped for.&lt;/p&gt;
+
+&lt;p&gt;So there you have it, the real story of how I got started with Go. Frankly, this isn&amp;rsquo;t something I ever planned on sharing, but the tech community needs more diverse voices. I&amp;rsquo;ve heard many people (predominantly men) talk about how they moved to Go from C, C++, or Ruby for systems programming or to build microservices. I hope that in some tiny way, this brings a more unique perspective to the table.&lt;/p&gt;
+
+&lt;p&gt;In a future post, I&amp;rsquo;ll talk more about how the Go community (even more than the language design itself) &amp;ldquo;restored my faith in tech communities.&amp;rdquo;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>On phones (part 1)</title>
+      <link>http://lipeggy.com/2015/06/21/on-phones-part-1</link>
+      <pubDate>Sun, 21 Jun 2015 23:45:59 -0700</pubDate>
+      
+      <guid>http://lipeggy.com/2015/06/21/on-phones-part-1</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve spent the past six months (yes, really, since December of what&amp;rsquo;s technically &amp;ldquo;last year&amp;rdquo;) searching for the &amp;ldquo;perfect next phone&amp;rdquo; now that my iPhone 4S of the past 2.25 years is overdue for an upgrade.&lt;/p&gt;
+
+&lt;p&gt;But the truth is, there isn&amp;rsquo;t a single smartphone on the market at the moment that I really like. It&amp;rsquo;s been a good run with the iPhone, but for various reasons I won&amp;rsquo;t go into, I would prefer to move to Android next. Nonetheless, I&amp;rsquo;ve researched the leading smartphones online and checked them out in person - both the iPhone 5* and 6 lines, the Nexus 6, Samsung Galaxy Note and S5 and S6, Motorola Moto X, LG G3, and HTC One M9 and I don&amp;rsquo;t know what else. I even looked up Windows phones and the Ubuntu phone, albeit more out of personal curiosity than consumer intent.&lt;/p&gt;
+
+&lt;p&gt;I am very fortunate to be in a position where price is not a substantial factor, but even when I look for the &amp;ldquo;best phone that money can buy&amp;rdquo;, nothing strikes a chord. I read the specs and carefully crafted descriptions for smartphones that boast 20-megapixel cameras, integrated cloud storage, better photo sharing experiences, six-inch screens&amp;hellip; everything, it seems, except what the phone was designed for, making and receiving calls. And in the case of the mobile phone, actually being portable (in other words, fitting in my pocket)?&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;On some evenings, I sit on my bed and cradle a LG Env3 VX9200 in my hand. My second, and third, phone &amp;ndash; because it was a phone I actually loved so much that when the two-year contract ended on the first one, I didn&amp;rsquo;t even consider a smartphone, instead opting to get the same model. By that time (early 2011, if I remember correctly), the Env3 was no longer even in active production or distribution, and I didn&amp;rsquo;t even care that my new phone had been sitting in the Verizon stockroom for who knows how long. In fact, the only reason I didn&amp;rsquo;t just continue using the same device is the same reason I&amp;rsquo;m not just reactivating one of them now, the dreaded loss of battery life over time.&lt;/p&gt;
+
+&lt;p&gt;But as much as I loved the design and fit and keyboard, it&amp;rsquo;s the memories and experiences that make me smile now: the text message inbox only holding up to 400 messages, and having to carefully select which messages to delete. Actually being able to speed-dial with literally one key, not having to go through windows of &amp;ldquo;Emergency Contacts&amp;rdquo; or &amp;ldquo;Favorite Contacts&amp;rdquo; nonsense. Not having a Facebook app, and updating my Facebook status by texting a specific number (fondly saved as &amp;ldquo;Facebook Status Update&amp;rdquo; in my address book). Don&amp;rsquo;t get me wrong, I still love the convenience that a modern smartphone affords, but I cannot ever imagine feeling this strong a nostalgia for my current iPhone when all my data is backed up on one cloud service or another, and I could easily order another iPhone 4S (hardware) on eBay or elsewhere online.&lt;/p&gt;
+
+&lt;p&gt;A phone I loved so much that I not only &lt;em&gt;kept&lt;/em&gt; both devices, but brought them both all the way from Maryland to California with me when I moved&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;The search continues.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>On buying books and donating</title>
+      <link>http://lipeggy.com/2015/05/24/on-buying-books-and-donating</link>
+      <pubDate>Sun, 24 May 2015 03:25:34 -0700</pubDate>
+      
+      <guid>http://lipeggy.com/2015/05/24/on-buying-books-and-donating</guid>
+      <description>&lt;p&gt;At the end of 2014, I was reflecting on my year and thinking about ways to optimize my time management, learning, personal finance, and other habits in the coming year.&lt;/p&gt;
+
+&lt;p&gt;I realized I have a tendency to buy a lot of books (read [no pun intended]: I rarely walk into a bookstore and leave empty-handed) that I never actually end up reading/finishing. As much as I love accumulating interesting books and supporting local bookstores, I want to be mindful of my spending and also find and leverage opportunities to build more good habits.&lt;/p&gt;
+
+&lt;p&gt;So I came up with a simple new year&amp;rsquo;s resolutions:  &lt;strong&gt;for every book purchase I make, I would donate to charity.&lt;/strong&gt; [1]&lt;/p&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t set amounts, thresholds, or other complex rules. I could define a purchase as &amp;ldquo;per-book&amp;rdquo; or &amp;ldquo;per-order&amp;rdquo; online / &amp;ldquo;per-visit&amp;rdquo; in-store. I could donate $5 or $50. I could donate to any organization, as long as I was reasonably confident that it was going to a good cause.&lt;/p&gt;
+
+&lt;p&gt;At first, I started off with &lt;a href=&#34;http://www.kiva.org/&#34;&gt;Kiva&lt;/a&gt; and &lt;a href=&#34;https://www.watsi.org&#34;&gt;Watsi&lt;/a&gt;. I&amp;rsquo;ve been fascinated by the idea of micro-lending since I first heard about Muhammad Yunus and the Grameen Bank back in high school, so Kiva was a natural first choice. I especially love how both platforms share the stories of individual people whom you can support, which creates both a feeling of greater transparency and a stronger human connection. (I actually joined the Watsi Universal Fund, but still receive and love receiving emails about whom a donation goes to support!)&lt;/p&gt;
+
+&lt;p&gt;Later, especially after the Nepal earthquake, I was interested in finding larger global organizations to support as well. Sites like &lt;a href=&#34;http://www.charitynavigator.org&#34;&gt;Charity Navigator&lt;/a&gt; have been an invaluable resource in removing one of my biggest mental barriers to making more charitable donations: finding fiscally responsible organizations with meaningful missions that make a real impact on the communities that need it most. While these are probably extreme examples, these &lt;a href=&#34;http://www.nytimes.com/2015/05/20/business/4-cancer-charities-accused-in-ftc-fraud-case.html?_r=0&#34;&gt;four scam cancer charities&lt;/a&gt; are precisely what I hope to avoid.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Needless to say (hopefully), I&amp;rsquo;m really pleased with how this has been going so far. No, I haven&amp;rsquo;t been going through my booklog (&lt;code&gt;echo backlog | sed s/back/book/&lt;/code&gt;) any faster – if anything, I spend slightly more time online looking for and learning about interesting, impactful, and inspiring organizations that are doing good around the world. But I truly, deeply hope that making this small tweak to a personal habit will, directly or indirectly, help positively impact somebody else&amp;rsquo;s life.&lt;/p&gt;
+
+&lt;p&gt;[1] This is not at all meant to imply that I want to be very frugal and neither buy books nor donate. I actually do the former at about the same rate, but now I regularly do the latter as well. :)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

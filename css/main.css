@@ -1,0 +1,27 @@
+body {
+    margin-top: 1.5em;
+}
+h1, p {
+    font-family: 'Source Serif Pro', 'Georgia', serif;
+}
+p {
+    font-size: 20px;
+    line-height: 32px;
+}
+a {
+  text-decoration: none;
+}
+#contact ul {
+    list-style: none;
+  }
+#contact li {
+    list-style: none;
+    display: inline;
+  }
+#contact p {
+    text-align: center;
+}
+#contact i {
+    color: #666;
+    padding-right: 0.5em;
+}
