@@ -1,0 +1,12 @@
+application: lipeggy-dot-com
+version: alpha-001
+runtime: go
+api_version: go1
+
+handlers:
+- url: /.well-known/acme-challenge/.*
+  static_files: acme/response.txt
+  upload: acme/response.txt
+- url: /.*
+  secure: always
+  script: _go_app
