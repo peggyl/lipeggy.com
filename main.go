@@ -2,7 +2,6 @@ package web
 
 import (
 	"net/http"
-	"strings"
 )
 
 func init() {
